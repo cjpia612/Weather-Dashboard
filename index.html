@@ -11,11 +11,44 @@
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1 w-100 text-center" style = "font-size: 36px;">Weather Dashboard</span>
     </nav>
-    
+    <div class = "container mt-2">
+        <div class= "row">
+            <div class = "col-4 bg-light">
+                <h4> Search for a City</h4>
+                <form class="form-inline">
+                    <input id= "city-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                  </form>
+            </div>
+            <div class= "col-8">
+                <div class= "row">
+                    <div class= "col-12 border border-dark rounded m-2">
+                        <div class= "row">
+                            <h3 id="city"></h3>
+                        </div>
+                        <div class= "row">
+                            <p id= "temp"></p>
+                        </div>
+                        <div class= "row">
+                            <p id = "humidity"></p>
+                        </div>
+                        <div class= "row">
+                            <p id= "wind"></p>
+                        </div>
+                        <div class= "row">
+                            <p id="UVI"></p>
+                        </div>
+                    </div>
+                    <h3 class= "m-2"> 5-Day Forecast:</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 </html>
