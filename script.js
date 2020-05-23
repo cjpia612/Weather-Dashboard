@@ -1,10 +1,21 @@
-// GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
 $(document).ready(function(){
 
     $(".btn").click(function(){
+        event.preventDefault();
+        var city= $("#cityInput").val();
+
+        $.ajax({
+            url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=6b8ef924d7aa3ffc3be582be83541797",
+            method: "GET",
+            dataType: "jsonp",
+            success: function(data){
+                console.log(data);
+            }
+        });
 
     });
+
+
 });
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
 // WHEN I view current weather conditions for that city
