@@ -5,6 +5,7 @@ $(document).ready(function(){
     $(".btn").click(function(){
         event.preventDefault();
         currentWeather();
+        fiveDay();
     });
 
     function currentWeather(){
@@ -39,8 +40,43 @@ $(document).ready(function(){
             dataType: "json",
             success: function (data){
                 $("#UVI").text("UV Index: " + data.value);
+
+                if (data.value <= 2.99) {                  
+                    $("#UVI").css({"background-color": "limegreen", "color": "white", "display": "block", "padding": "1.5%", "max-width": "20%"});
+                } else if (data.value >= 3 & data.value <= 5.99) {
+                     $("#UVI").css({"background-color": "gold", "color": "white", "display": "block", "padding": "1.5%", "max-width": "20%"});
+                } else if (data.value >= 6 & data.value <= 7.99) {
+                     $("#UVI").css({"background-color": "orange", "color": "white", "display": "block", "padding": "1.5%", "max-width": "20%"});
+                } else if (data.value >= 8) {
+                     $("#UVI").css({"background-color": "red", "color": "white", "display": "block", "padding": "1.5%", "max-width": "20%"});
+                };
             }
         });
+    }
+
+    function fiveDay(){
+        var city= $("#cityInput").val();
+        var dayOne= moment().add(1, 'days').format('L');
+        var dayTwo= moment().add(2, 'days').format('L');
+        var dayThree= moment().add(3, 'days').format('L');
+        var dayFour= moment().add(4, 'days').format('L');
+        var dayFive= moment().add(5, 'days').format('L');
+
+        $.ajax({
+            url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&appid=6b8ef924d7aa3ffc3be582be83541797",
+            method: "GET",
+            dataType: "jsonp",
+            success: function(data){
+                $("#oneDate").text(dayOne);
+                $("#twoDate").text(dayTwo);
+                $("#threeDate").text(dayThree);
+                $("#fourDate").text(dayFour);
+                $("#fiveDate").text(dayFive);
+
+                
+            }
+        });
+        
     }
 });
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
