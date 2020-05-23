@@ -1,10 +1,15 @@
 $(document).ready(function(){
+    var lat = [];
+    var lon = [];
 
     $(".btn").click(function(){
         event.preventDefault();
+        currentWeather();
+    });
+
+    function currentWeather(){
         var city= $("#cityInput").val();
         var currentDate = moment().format("MMMM Do YYYY");
-
         $.ajax({
             url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=6b8ef924d7aa3ffc3be582be83541797",
             method: "GET",
@@ -14,12 +19,29 @@ $(document).ready(function(){
                 $("#temp").text("Temperature: " + data.main.temp+ 'F');
                 $("#humidity").text("Humidity: " + data.main.humidity + '%');
                 $("#wind").text("Wind Speed: " + data.wind.speed+ ' MPH');
+
+                lat.push(data.coord.lat);
+                lon.push(data.coord.lon);
+
+                getUV();
+
+                lat.splice(0,1);
+                lon.splice(0,1);
+          
             }
         });
-
-    });
-
-
+        
+    }
+    function getUV(){
+        $.ajax({
+            url: "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat[0] + "&lon=" + lon[0] +"&appid=6b8ef924d7aa3ffc3be582be83541797",
+            method: "GET",
+            dataType: "json",
+            success: function (data){
+                $("#UVI").text("UV Index: " + data.value);
+            }
+        });
+    }
 });
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
 // WHEN I view current weather conditions for that city
