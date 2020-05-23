@@ -3,13 +3,17 @@ $(document).ready(function(){
     $(".btn").click(function(){
         event.preventDefault();
         var city= $("#cityInput").val();
+        var currentDate = moment().format("MMMM Do YYYY");
 
         $.ajax({
             url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=6b8ef924d7aa3ffc3be582be83541797",
             method: "GET",
             dataType: "jsonp",
             success: function(data){
-                console.log(data);
+                $("#city").text(city+" " + currentDate);
+                $("#temp").text("Temperature: " + data.main.temp+ 'F');
+                $("#humidity").text("Humidity: " + data.main.humidity + '%');
+                $("#wind").text("Wind Speed: " + data.wind.speed+ ' MPH');
             }
         });
 
