@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    getter();
     var lat = [];
     var lon = [];
     var cityInput = [];
@@ -117,15 +118,15 @@ $(document).ready(function(){
     }
 
     function getter(){
-        var inputSearches = JSON.parse(localStorage.getItem(cityInput));
+        var inputSearches = JSON.parse(localStorage.getItem("pastCities"));
         if (inputSearches == null){
             inputSearches = [];
         } else {
             for (let i= 0; i < inputSearches.length; i++){
-                prepend(inputSearches);
+                prepend(inputSearches[i]);
             }
         }
     }
-    getter();
+    
 });
 
