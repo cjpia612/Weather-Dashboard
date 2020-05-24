@@ -1,9 +1,11 @@
 $(document).ready(function(){
+    // Calling Local Storage getter function and empty variable arrays to push into 
     getter();
     var lat = [];
     var lon = [];
     var cityInput = [];
 
+    //Search button click event
     $(".btn").click(function(){
         var city= $("#cityInput").val();
         event.preventDefault();
@@ -13,6 +15,7 @@ $(document).ready(function(){
         console.log(city);
     });
 
+    // Current Weather function ajax call
     function currentWeather(){
         var city= $("#cityInput").val();
         cityInput.push(city);
@@ -24,6 +27,7 @@ $(document).ready(function(){
             dataType: "jsonp",
             success: function(data){
                 $("#city").text(city+" " + currentDate);
+                $("#currentIcon").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
                 $("#temp").text("Temperature: " + data.main.temp+ 'F');
                 $("#humidity").text("Humidity: " + data.main.humidity + '%');
                 $("#wind").text("Wind Speed: " + data.wind.speed+ ' MPH');
@@ -40,6 +44,8 @@ $(document).ready(function(){
         });
         
     }
+
+    // UV index function ajax call
     function getUV(){
         $.ajax({
             url: "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat[0] + "&lon=" + lon[0] +"&appid=6b8ef924d7aa3ffc3be582be83541797",
@@ -61,6 +67,7 @@ $(document).ready(function(){
         });
     }
 
+    // Five Day Forecast function ajax call
     function fiveDay(){
         var city= $("#cityInput").val();
         var dayOne= moment().add(1, 'days').format('L');
@@ -110,6 +117,7 @@ $(document).ready(function(){
         
     }
 
+    // Prepend Function
     function prepend(blahInput){
         var listCity= $("<li>");
         listCity.addClass("list-group-item");
@@ -117,6 +125,7 @@ $(document).ready(function(){
         $("#cityItems").prepend(listCity);
     }
 
+    // Get Local Storage 
     function getter(){
         var inputSearches = JSON.parse(localStorage.getItem("pastCities"));
         if (inputSearches == null){
