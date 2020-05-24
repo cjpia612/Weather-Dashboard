@@ -67,14 +67,38 @@ $(document).ready(function(){
             method: "GET",
             dataType: "jsonp",
             success: function(data){
+                //  To get the date for the 5 day forecast
                 $("#oneDate").text(dayOne);
                 $("#twoDate").text(dayTwo);
                 $("#threeDate").text(dayThree);
                 $("#fourDate").text(dayFour);
                 $("#fiveDate").text(dayFive);
 
-                
-            }
+                // To get the weather icon for the forecast from 12PM Afternoon
+
+                $("#oneIcon").attr("src", "http://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png");
+                $("#twoIcon").attr("src", "http://openweathermap.org/img/w/" + data.list[12].weather[0].icon + ".png");
+                $("#threeIcon").attr("src", "http://openweathermap.org/img/w/" + data.list[20].weather[0].icon + ".png");
+                $("#fourIcon").attr("src", "http://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png");
+                $("#fiveIcon").attr("src", "http://openweathermap.org/img/w/" + data.list[36].weather[0].icon + ".png");
+
+                // To get the temperature for the forecast from 12PM Afternoon
+
+                $("#oneTemp").text("Temp: " + data.list[4].main.temp + "F");
+                $("#twoTemp").text("Temp: " + data.list[12].main.temp + "F");
+                $("#threeTemp").text("Temp: " + data.list[20].main.temp + "F");
+                $("#fourTemp").text("Temp: " + data.list[28].main.temp + "F");
+                $("#fiveTemp").text("Temp: " + data.list[36].main.temp + "F");
+
+                // To get the humidity for the forecast from 12PM Afternoon. 
+
+                $("#oneHum").text("Humidity: " + data.list[4].main.humidity + "%");
+                $("#twoHum").text("Humidity: " + data.list[12].main.humidity + "%");
+                $("#threeHum").text("Humidity: " + data.list[20].main.humidity + "%");
+                $("#fourHum").text("Humidity: " + data.list[28].main.humidity + "%");
+                $("#fiveHum").text("Humidity: " + data.list[36].main.humidity + "%");
+
+            } 
         });
         
     }
